@@ -8,11 +8,18 @@
 <link rel="apple-touch-icon" href="/tm-icon.png">
 <meta name="theme-color" content="#F4F5FF">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="TypingMind">
 <meta property="og:url" content="https://typingmind.org/">
 <meta property="og:title" content="TypingMind — independent chat UI for every AI model">
 <meta property="og:description" content="No platform lock-in. Bring your own API keys for ChatGPT, Claude, Gemini, and other major models. One-time purchase. No subscription. No data sent to our server">
 <meta property="og:image" content="https://image.social/get?url=typingmind.com">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@tdinh_me">
+<meta name="twitter:title" content="TypingMind — independent chat UI for every AI model">
+<meta name="twitter:description" content="No platform lock-in. Bring your own API keys for ChatGPT, Claude, Gemini, and other major models. One-time purchase. No subscription. No data sent to our server">
+<meta name="twitter:image" content="https://image.social/get?url=typingmind.com">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"TypingMind","description":"No platform lock-in. Bring your own API keys for ChatGPT, Claude, Gemini, and other major models. One-time purchase. No subscription. No data sent to our server","applicationCategory":"DeveloperApplication","operatingSystem":"Web","url":"https://typingmind.com/","sameAs":["https://typingmind.com/","https://typingmind.org/"]}
 </script>
@@ -26,64 +33,148 @@ body{
   background:#FFFFFF;
   -webkit-font-smoothing:antialiased;
 }
-a{color:#2563EB;text-decoration:none}
+a{color:#2563EB;text-decoration:none;transition:color .15s}
 a:hover{color:#1D4ED8}
+img{max-width:100%;height:auto;display:block}
 
+/* Top nav */
 .nav{
-  background:#FFFFFF;border-bottom:1px solid #E2E8F0;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:saturate(160%) blur(8px);
+  -webkit-backdrop-filter:saturate(160%) blur(8px);
+  border-bottom:1px solid #E2E8F0;
   padding:14px 22px;
   display:flex;align-items:center;gap:12px;
+  position:sticky;top:0;z-index:50;
 }
 .nav .logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:17px;color:#0F172A;letter-spacing:-.01em}
-.nav .logo img{width:28px;height:28px;border-radius:7px}
+.nav .logo img{width:30px;height:30px;border-radius:8px}
 .nav .logo .blue{color:#2563EB}
 .nav .sep{color:#CBD5E1;font-weight:400;margin:0 2px}
-.nav .sub{color:#64748B;font-weight:600;font-size:14px}
+.nav .sub{color:#64748B;font-weight:600;font-size:14.5px}
 .nav .spacer{flex:1}
 .nav a.cta{
   background:#2563EB;color:#fff;
   padding:8px 16px;border-radius:9px;
   font-weight:600;font-size:13.5px;
-  transition:background .15s;
+  transition:background .15s,transform .15s,box-shadow .15s;
+  box-shadow:0 2px 6px rgba(37,99,235,.18);
 }
-.nav a.cta:hover{background:#1D4ED8;color:#fff}
+.nav a.cta:hover{background:#1D4ED8;color:#fff;transform:translateY(-1px);box-shadow:0 5px 14px rgba(37,99,235,.28)}
 
+/* Hero with subtle animated glow */
 .hero{
-  background:linear-gradient(180deg,#F4F5FF 0%,#EAEDFA 100%);
+  background:linear-gradient(180deg,#F4F5FF 0%,#EAEDFA 65%,#F4F5FF 100%);
   text-align:center;
-  padding:80px 22px 88px;
-  width:100%;
+  padding:90px 22px 96px;
+  position:relative;overflow:hidden;width:100%;
 }
-.hero .wrap{max-width:760px;margin:0 auto;width:100%}
+.hero::before{
+  content:"";position:absolute;
+  top:-160px;left:50%;transform:translateX(-50%);
+  width:680px;height:680px;border-radius:50%;
+  filter:blur(40px);pointer-events:none;
+  background:radial-gradient(closest-side,rgba(59,130,246,.30),transparent 70%);
+  animation:pulseA 9s ease-in-out infinite;
+}
+.hero::after{
+  content:"";position:absolute;
+  bottom:-180px;left:18%;
+  width:420px;height:420px;border-radius:50%;
+  filter:blur(40px);pointer-events:none;
+  background:radial-gradient(closest-side,rgba(124,108,255,.28),transparent 70%);
+  animation:pulseB 11s ease-in-out infinite;
+}
+@keyframes pulseA{
+  0%,100%{opacity:.45;transform:translateX(-50%) scale(1)}
+  50%   {opacity:.65;transform:translateX(-50%) scale(1.08)}
+}
+@keyframes pulseB{
+  0%,100%{opacity:.40;transform:scale(1)}
+  50%   {opacity:.60;transform:scale(1.10)}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero::before,.hero::after{animation:none}
+}
+
+.hero .wrap{max-width:820px;margin:0 auto;position:relative;z-index:1;width:100%}
+.hero .brand{
+  display:inline-flex;align-items:center;gap:9px;
+  background:#FFFFFF;border:1px solid #E2E8F0;
+  padding:6px 13px 6px 7px;border-radius:99px;
+  font-size:13.5px;font-weight:600;color:#0F172A;
+  margin-bottom:26px;
+  box-shadow:0 1px 3px rgba(15,23,42,.06);
+}
+.hero .brand img{width:22px;height:22px;border-radius:5px}
+.hero .brand .blue{color:#2563EB}
+.hero .brand .sep{color:#CBD5E1;margin:0 2px}
+.hero .brand .for{color:#64748B;font-weight:600}
 .hero h1{
-  font-size:clamp(32px,5vw,54px);
-  font-weight:800;letter-spacing:-.03em;line-height:1.08;
+  font-size:clamp(34px,5.6vw,60px);
+  font-weight:800;letter-spacing:-.03em;line-height:1.06;
   color:#0F172A;margin-bottom:22px;overflow-wrap:break-word;
 }
 .hero h1 .accent{color:#2563EB}
 .hero p.sub{
-  font-size:clamp(15.5px,1.9vw,18.5px);
+  font-size:clamp(16px,1.95vw,19px);
   color:#475569;line-height:1.55;
-  max-width:600px;margin:0 auto 32px;overflow-wrap:break-word;
+  max-width:620px;margin:0 auto 34px;overflow-wrap:break-word;
 }
+.hero .ctas{display:inline-flex;flex-direction:column;align-items:center;gap:12px}
 .btn{
-  display:inline-block;
+  display:inline-flex;align-items:center;gap:7px;
   background:#2563EB;color:#fff;
   padding:14px 26px;border-radius:11px;
-  font-weight:600;font-size:15px;
-  transition:background .15s,transform .15s;
-  box-shadow:0 4px 14px rgba(37,99,235,.22);
+  font-weight:600;font-size:15.5px;
+  transition:background .15s,transform .15s,box-shadow .15s;
+  box-shadow:0 6px 18px rgba(37,99,235,.22);
 }
-.btn:hover{background:#1D4ED8;color:#fff;transform:translateY(-1px)}
-.hero .free{display:block;margin-top:16px;font-size:14px;color:#64748B}
+.btn:hover{background:#1D4ED8;color:#fff;transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,99,235,.30)}
+.btn-arrow{display:inline-block;transition:transform .15s}
+.btn:hover .btn-arrow{transform:translateX(3px)}
+.hero .free{font-size:14.5px;color:#64748B;font-weight:500}
 .hero .free a{color:#0F172A;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 
+/* Trust strip — 3 plain-text stats, no emoji */
+.trust-strip{
+  background:#FFFFFF;
+  border-bottom:1px solid #EEF1F8;
+  padding:36px 22px;
+}
+.trust-strip .wrap{
+  max-width:980px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center;
+}
+.trust-strip .tcol .num{
+  font-size:clamp(20px,2.6vw,28px);font-weight:800;color:#2563EB;letter-spacing:-.015em;
+}
+.trust-strip .tcol .lbl{
+  font-size:13.5px;color:#64748B;margin-top:6px;line-height:1.45;
+}
+
+/* Intro — one-paragraph "what is it" */
 .intro{
-  max-width:680px;margin:0 auto;padding:56px 22px;
+  max-width:680px;margin:0 auto;padding:64px 22px;
   text-align:center;
 }
 .intro p{
   font-size:16.5px;color:#475569;line-height:1.7;
+}
+
+/* Mid CTA card */
+.mid-cta{
+  background:linear-gradient(135deg,#EFF6FF 0%,#F4F5FF 100%);
+  border-top:1px solid #DBE4FF;border-bottom:1px solid #DBE4FF;
+  padding:60px 22px;text-align:center;
+}
+.mid-cta h2{
+  font-size:clamp(22px,2.8vw,30px);font-weight:800;
+  margin-bottom:12px;color:#0F172A;letter-spacing:-.02em;
+}
+.mid-cta p{
+  color:#475569;margin-bottom:24px;font-size:16px;
+  max-width:520px;margin-left:auto;margin-right:auto;line-height:1.55;
 }
 
 footer{
@@ -97,8 +188,10 @@ footer a{color:#2563EB}
 @media(max-width:680px){
   .nav{padding:12px 16px}
   .nav .sub,.nav .sep{display:none}
-  .hero{padding:60px 18px 64px}
-  .intro{padding:44px 18px}
+  .hero{padding:60px 18px 72px}
+  .trust-strip .wrap{grid-template-columns:1fr;gap:18px}
+  .intro{padding:48px 18px}
+  .mid-cta{padding:48px 22px}
 }
 </style></head><body>
 
@@ -114,14 +207,45 @@ footer a{color:#2563EB}
 </header>
 
 <section class="hero"><div class="wrap">
+  <div class="brand">
+    <img src="/tm-icon.png" alt="">
+    <span>Typing<span class="blue">Mind</span></span>
+    <span class="sep">|</span>
+    <span class="for">typingmind.org</span>
+  </div>
   <h1>An independent chat UI <span class="accent">for AI.</span></h1>
   <p class="sub">No platform lock-in. Bring your own API keys for ChatGPT, Claude, Gemini, and other major models. One-time purchase. No subscription. No data sent to our servers.</p>
-  <a class="btn" href="https://typingmind.com/?ref=typingmind.org">Open typingmind.com</a>
-  <span class="free"><a href="https://typingmind.com/?ref=typingmind.org">Or try the free version</a></span>
+  <div class="ctas">
+    <a class="btn" href="https://typingmind.com/?ref=typingmind.org">Get a lifetime license <span class="btn-arrow">&rarr;</span></a>
+    <a class="free" href="https://typingmind.com/?ref=typingmind.org">Or try the free version</a>
+  </div>
 </div></section>
+
+<section class="trust-strip">
+  <div class="wrap">
+    <div class="tcol">
+      <div class="num">20,641+</div>
+      <div class="lbl">happy customers use TypingMind daily</div>
+    </div>
+    <div class="tcol">
+      <div class="num">4.6 / 5</div>
+      <div class="lbl">across 1,271+ public reviews</div>
+    </div>
+    <div class="tcol">
+      <div class="num">One-time</div>
+      <div class="lbl">lifetime license, no subscription</div>
+    </div>
+  </div>
+</section>
 
 <section class="intro">
   <p>TypingMind isn't affiliated with any single AI provider. Your conversations stay between you and the model you're talking to. We never see your data or your API keys.</p>
+</section>
+
+<section class="mid-cta">
+  <h2>Continue to the full app</h2>
+  <p>Try TypingMind free at <b>typingmind.com</b> &mdash; no signup, no credit card, no email required.</p>
+  <a class="btn" href="https://typingmind.com/?ref=typingmind.org">Open typingmind.com <span class="btn-arrow">&rarr;</span></a>
 </section>
 
 <footer>
